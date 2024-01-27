@@ -8,14 +8,12 @@
 [node name="Scene" type="Node2D"]
 script = ExtResource("1_kamac")
 
-[node name="Player" parent="." groups=["player"] instance=ExtResource("3_1l4uw")]
-position = Vector2(375, 222)
-collision_layer = 129
-collision_mask = 129
-
 [node name="Platform" parent="." instance=ExtResource("2_ahr8w")]
 position = Vector2(576, 629)
 scale = Vector2(2.36958, 0.914481)
 
 [node name="Enemy" parent="." groups=["enemy"] instance=ExtResource("5_ymbuy")]
 position = Vector2(938, 310)
+
+[node name="Player" parent="." instance=ExtResource("3_1l4uw")]
+position = Vector2(148, 229)

@@ -1,5 +1,12 @@
 extends CharacterBody2D
 
+enum STATE {
+	IDLE,
+	WALKING,
+	HIT,
+	ATTACKING
+}
+
 var screen_size
 
 const UP_DIRECTION = Vector2.UP
@@ -9,7 +16,10 @@ const UP_DIRECTION = Vector2.UP
 @export var GRAVITY = 4500
 
 var attack_hitbox
-var timer
+var attack_timer
+
+var anim_state
+var anim_timer
 
 var hp = 10;
 
@@ -37,66 +47,61 @@ func movement(delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
-	move_and_slide()
-	pass
 	
-func movement_legacy(velocity, playerSpeed):
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
+	# Animation handling
+	if !anim_timer.is_stopped():
+		if velocity.length() > 0:
+			anim_state = STATE.WALKING
+		else:
+			anim_state = STATE.IDLE
 		
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * playerSpeed
-		#$AnimatedSprite2D.play() # animaatiot ei toimi jos ne heittää process()
-	else:
-		#$AnimatedSprite2D.stop()
-		pass
-		
-	position += velocity * get_process_delta_time()
-	position = position.clamp(Vector2.ZERO, screen_size) # Prevents the player from leaving 
-	pass
-
-func animations():
-	if $AnimatedSprite2D.get_animation() == "hit":
-		pass
-	if velocity != Vector2.ZERO:
-		$AnimatedSprite2D.stop()
-	else:
-		$AnimatedSprite2D.play("idle")
+	move_and_slide()
 	pass
 
 func take_damage():
 	print("player took damage")
+	anim_timer.stop()
+	anim_state = STATE.HIT
+	$AnimatedSprite2D.play("hit")
 	pass
 
 func attack():
-	$AnimatedSprite2D.play("attack")
-	
-	$Timer.start()
+	anim_state = STATE.ATTACKING
 	pass
+
+func animations():
+	if anim_state == STATE.HIT:
+		print("anim_state")
+	if anim_timer.is_stopped():
+		if anim_state == STATE.IDLE:
+			$AnimatedSprite2D.play("idle")
+		elif anim_state == STATE.WALKING:
+			$AnimatedSprite2D.play("walk")
+		elif anim_state == STATE.HIT: # EI TOIMI
+			$AnimatedSprite2D.play("hit")
+			anim_timer.set_wait_time(0.5)
+		elif anim_state == STATE.ATTACKING:
+			$AnimatedSprite2D.play("attack")
+			anim_timer.set_wait_time(0.5)
+
+		pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	attack_hitbox = $hitbox
+	attack_hitbox = $hitbox #TODO: fix
+	anim_timer = $AnimatedSprite2D/Timer
+	anim_state = STATE.IDLE
 	pass 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process (delta):
 	movement(delta)
-	animations()
+	
 	if Input.is_action_pressed("attack"):
 		attack()
-	pass
-	$AnimatedSprite2D.stop()
-	$AnimatedSprite2D.play("hit")
-	
-	hp -= 1
-	if hp == 0:
-		pass #TODO: death logic
-	pass 
+		
 
-func _on_timer_timeout():
-	pass
+	animations()
+
+	pass 
