@@ -8,23 +8,17 @@ const UP_DIRECTION = Vector2.UP
 @export var JUMP_STRENGTH = 1500
 @export var GRAVITY = 4500
 
-var hp = 10;
+var attack_hitbox
 
+var hp = 10;
 
 
 '''
 TODO:
-	Jump logic
 	Attack function
 		- animation, spawn collision, add damage 
 
 '''
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	screen_size = get_viewport_rect().size
-	pass # Replace with function body.
 
 
 func movement(delta):
@@ -64,6 +58,8 @@ func movement_legacy(velocity, playerSpeed):
 	pass
 
 func animations():
+	if $AnimatedSprite2D.get_animation() == "hit":
+		pass
 	if velocity != Vector2.ZERO:
 		$AnimatedSprite2D.stop()
 	else:
@@ -71,17 +67,32 @@ func animations():
 	pass
 
 func attack():
+	$AnimatedSprite2D.play("attack")
 	
+	$Timer.start()
 	pass
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	screen_size = get_viewport_rect().size
+	attack_hitbox = $hitbox
+	
+	pass 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process (delta):
 	movement(delta)
 	animations()
-	attack()
+	if Input.is_action_pressed("attack"):
+		attack()
 	pass
+	$AnimatedSprite2D.stop()
+	$AnimatedSprite2D.play("hit")
+	
+	hp -= 1
+	if hp == 0:
+		pass #TODO: death logic
+	pass 
 
-
-func _on_playerHit():
-	print("Player hit")
-	pass # Replace with function body.
+func _on_timer_timeout():
+	pass
