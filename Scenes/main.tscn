@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bx1f7tvd3btyw"]
+[gd_scene load_steps=6 format=3 uid="uid://bx1f7tvd3btyw"]
 
-[ext_resource type="Script" path="res://Scripts/main.gd" id="1_kamac"]
+[ext_resource type="Script" path="res://Scenes/main.gd" id="1_kamac"]
 [ext_resource type="PackedScene" uid="uid://bngry3j4o6n68" path="res://Scenes/platform.tscn" id="2_ahr8w"]
 [ext_resource type="PackedScene" uid="uid://djmsikwub44xa" path="res://Scenes/player.tscn" id="3_1l4uw"]
-[ext_resource type="PackedScene" uid="uid://bjjgnme0shk1d" path="res://Scenes/enemy.tscn" id="5_ymbuy"]
+[ext_resource type="PackedScene" uid="uid://bes7c5c01ccbg" path="res://Scenes/hitbox.tscn" id="4_68uhl"]
+[ext_resource type="PackedScene" uid="uid://ckm3y8u4otn8" path="res://Scenes/hud.tscn" id="5_4g65y"]
 
 [node name="Scene" type="Node2D"]
 script = ExtResource("1_kamac")
 
-[node name="Player" parent="." groups=["player"] instance=ExtResource("3_1l4uw")]
+[node name="Player" parent="." instance=ExtResource("3_1l4uw")]
 position = Vector2(375, 222)
 collision_layer = 129
 collision_mask = 129
@@ -17,5 +18,10 @@ collision_mask = 129
 position = Vector2(576, 629)
 scale = Vector2(2.36958, 0.914481)
 
-[node name="Enemy" parent="." groups=["enemy"] instance=ExtResource("5_ymbuy")]
-position = Vector2(938, 310)
+[node name="hitbox" parent="." instance=ExtResource("4_68uhl")]
+position = Vector2(552, 497)
+
+[node name="HUD" parent="." instance=ExtResource("5_4g65y")]
+
+[connection signal="playerHit" from="." to="Player" method="_on_playerHit"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_body_entered"]

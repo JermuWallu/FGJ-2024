@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckm3y8u4otn8"]
+
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_ywk7o"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_ywk7o")
+
+[node name="Score" type="Label" parent="."]
+offset_left = 1090.0
+offset_top = 21.0
+offset_right = 1127.0
+offset_bottom = 109.0
+theme_override_font_sizes/font_size = 64
+text = "0"
+
+[node name="Time" type="Label" parent="."]
+offset_left = 1090.0
+offset_top = 119.0
+offset_right = 1127.0
+offset_bottom = 213.0
+theme_override_font_sizes/font_size = 64
+text = "0"
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 970.0
+offset_top = -1.0
+offset_right = 1098.0
+offset_bottom = 66.0
+theme_override_font_sizes/font_size = 45
+text = "Score"
+
+[node name="TimeLabel" type="Label" parent="."]
+offset_left = 971.0
+offset_top = 102.0
+offset_right = 1099.0
+offset_bottom = 169.0
+theme_override_font_sizes/font_size = 45
+text = "Time"
