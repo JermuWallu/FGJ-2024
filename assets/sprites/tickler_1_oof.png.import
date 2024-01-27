@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5to0tshl0dic"
-path="res://.godot/imported/tickler_1_idlepose1.png-6c4c3e3ddae309ccd22585aa85e63c27.ctex"
+uid="uid://cby7i5hfht6se"
+path="res://.godot/imported/tickler_1_oof.png-6f80b8cefc033ee27f218c972a5bc49d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tickler_1_idlepose1.png"
-dest_files=["res://.godot/imported/tickler_1_idlepose1.png-6c4c3e3ddae309ccd22585aa85e63c27.ctex"]
+source_file="res://assets/sprites/tickler_1_oof.png"
+dest_files=["res://.godot/imported/tickler_1_oof.png-6f80b8cefc033ee27f218c972a5bc49d.ctex"]
 
 [params]
 
