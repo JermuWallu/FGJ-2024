@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4tualv45lf7y"
-path="res://.godot/imported/basic_sprite2.png-37b3d8dcdd00cb61aded498fd5799b54.ctex"
+uid="uid://csa020oaa7v1f"
+path="res://.godot/imported/tickler_1_attack1.png-fe8a1c7a216b7470873215bd1b62d30c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/basic_sprite2.png"
-dest_files=["res://.godot/imported/basic_sprite2.png-37b3d8dcdd00cb61aded498fd5799b54.ctex"]
+source_file="res://assets/tickler_1_attack1.png"
+dest_files=["res://.godot/imported/tickler_1_attack1.png-fe8a1c7a216b7470873215bd1b62d30c.ctex"]
 
 [params]
 
