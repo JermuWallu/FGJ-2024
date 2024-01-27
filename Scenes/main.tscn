@@ -17,5 +17,4 @@ shape = SubResource("RectangleShape2D_rcodw")
 [node name="Sprite" type="Sprite2D" parent="Platform"]
 texture = ExtResource("3_ds34a")
 
-[node name="Player2" parent="." instance=ExtResource("3_1l4uw")]
-position = Vector2(300, 174)
+[node name="Player" parent="." instance=ExtResource("3_1l4uw")]
