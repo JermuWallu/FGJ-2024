@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjjgnme0shk1d"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_wxt2p"]
+[ext_resource type="Texture2D" uid="uid://coguxreqncjnr" path="res://assets/basic_sprite.png" id="2_r3twe"]
+[ext_resource type="PackedScene" uid="uid://bes7c5c01ccbg" path="res://Scenes/hitbox.tscn" id="3_bs7es"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ejen"]
+size = Vector2(277, 437)
+
+[node name="Enemy" type="RigidBody2D"]
+script = ExtResource("1_wxt2p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("2_r3twe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5.5, 34.5)
+shape = SubResource("RectangleShape2D_2ejen")
+
+[node name="hitbox" parent="." instance=ExtResource("3_bs7es")]
+position = Vector2(-140, 78)

@@ -1,21 +1,37 @@
-[gd_scene load_steps=7 format=3 uid="uid://djmsikwub44xa"]
+[gd_scene load_steps=9 format=3 uid="uid://djmsikwub44xa"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_06llp"]
+<<<<<<< HEAD
 [ext_resource type="Texture2D" uid="uid://b5to0tshl0dic" path="res://assets/sprites/tickler_1_idlepose1.png" id="2_n423n"]
 [ext_resource type="Texture2D" uid="uid://phjwjbd88tvu" path="res://assets/sprites/tickler_1_idlepose2.png" id="3_w8cqc"]
 [ext_resource type="Texture2D" uid="uid://cby7i5hfht6se" path="res://assets/sprites/tickler_1_oof.png" id="4_kovf2"]
+=======
+[ext_resource type="Texture2D" uid="uid://csa020oaa7v1f" path="res://assets/tickler_1_attack1.png" id="2_iw7o5"]
+[ext_resource type="Texture2D" uid="uid://b5to0tshl0dic" path="res://assets/tickler_1_idlepose1.png" id="2_n423n"]
+[ext_resource type="Texture2D" uid="uid://phjwjbd88tvu" path="res://assets/tickler_1_idlepose2.png" id="3_w8cqc"]
+[ext_resource type="Texture2D" uid="uid://cby7i5hfht6se" path="res://assets/tickler_1_oof.png" id="4_kovf2"]
+[ext_resource type="Script" path="res://Scripts/Timer.gd" id="6_r400j"]
+>>>>>>> fb587cc9722615bf8fd666bf166a17b577f5fe40
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_510kj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_n423n")
-}, {
-"duration": 3.0,
-"texture": ExtResource("4_kovf2")
+"texture": ExtResource("2_iw7o5")
 }],
 "loop": true,
-"name": &"hurt",
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("4_kovf2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_n423n")
+}],
+"loop": false,
+"name": &"hit",
 "speed": 5.0
 }, {
 "frames": [{
@@ -39,10 +55,14 @@ script = ExtResource("1_06llp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_510kj")
-animation = &"idle"
-frame_progress = 0.236488
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(39.5, 5.5)
 scale = Vector2(1.04285, 1)
 shape = SubResource("RectangleShape2D_g3kb2")
+
+[node name="Timer" type="Timer" parent="."]
+script = ExtResource("6_r400j")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,13 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bes7c5c01ccbg"]
+[gd_scene load_steps=4 format=3 uid="uid://bes7c5c01ccbg"]
 
-[ext_resource type="Script" path="res://Scenes/hitbox.gd" id="1_io3b0"]
+[ext_resource type="Script" path="res://Scripts/hitbox.gd" id="1_io3b0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dn376"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_6s8qn"]
+specular_color = Color(0.858824, 0.0588235, 0.509804, 1)
 
 [node name="hitbox" type="Area2D"]
 script = ExtResource("1_io3b0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dn376")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("CanvasTexture_6s8qn")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
