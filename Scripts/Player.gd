@@ -1,6 +1,13 @@
-extends Area2D
+extends CharacterBody2D
+
+
+const UP_DIRECTION = Vector2.UP
 
 @export var speed = 400
+
+@export var jump_strenght = 1500
+@export var gravity = 4500
+
 var screen_size
 
 '''
@@ -37,7 +44,7 @@ func movement(velocity, playerSpeed):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
+	
 	movement(velocity, speed)
 	
 	
