@@ -1,0 +1,8 @@
+Sequence:
+- player presses attack button
+- animation
+- player node spawn hitbox (gives size and position as parameters)
+- 
+
+BUG:
+- hitbox will hit owner if if its inside its collision

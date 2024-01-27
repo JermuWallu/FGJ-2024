@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjjgnme0shk1d"]
+[gd_scene load_steps=5 format=3 uid="uid://bjjgnme0shk1d"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_wxt2p"]
 [ext_resource type="Texture2D" uid="uid://coguxreqncjnr" path="res://assets/basic_sprite.png" id="2_r3twe"]
+[ext_resource type="PackedScene" uid="uid://bes7c5c01ccbg" path="res://Scenes/hitbox.tscn" id="3_bs7es"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ejen"]
 size = Vector2(277, 437)
@@ -17,4 +18,5 @@ texture = ExtResource("2_r3twe")
 position = Vector2(-5.5, 34.5)
 shape = SubResource("RectangleShape2D_2ejen")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="hitbox" parent="." instance=ExtResource("3_bs7es")]
+position = Vector2(-140, 78)

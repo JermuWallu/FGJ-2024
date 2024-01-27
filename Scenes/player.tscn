@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://djmsikwub44xa"]
+[gd_scene load_steps=9 format=3 uid="uid://djmsikwub44xa"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_06llp"]
 [ext_resource type="Texture2D" uid="uid://oaywdyu1dbi" path="res://assets/tickler_1_attack1.png" id="2_iw7o5"]
@@ -43,9 +43,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g3kb2"]
 size = Vector2(479, 895)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fopu0"]
-size = Vector2(206.667, 186.667)
-
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_06llp")
@@ -58,13 +55,6 @@ animation = &"attack"
 position = Vector2(39.5, 5.5)
 scale = Vector2(1.04285, 1)
 shape = SubResource("RectangleShape2D_g3kb2")
-
-[node name="hitbox" type="Area2D" parent="."]
-position = Vector2(293.333, 0)
-
-[node name="CollisionHitbox" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(120, 23.3333)
-shape = SubResource("RectangleShape2D_fopu0")
 
 [node name="Timer" type="Timer" parent="."]
 script = ExtResource("6_r400j")

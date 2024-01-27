@@ -12,13 +12,10 @@ func _process(delta):
 	pass
 
 func _on_body_entered(body):
-	#	if body.is_in_group("player")
-	
-#		print("I touch", body)
 	print("I touch", body)
 	
-	if body == get_node("res://Scenes/player.tscn"):
-		playerHit.emit()
+	if body.has_method("take_damage"):
+		body.take_damage()
 	pass
 	#queue_free()  # Destroy the hitbox when touched
 

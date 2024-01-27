@@ -9,6 +9,7 @@ const UP_DIRECTION = Vector2.UP
 @export var GRAVITY = 4500
 
 var attack_hitbox
+var timer
 
 var hp = 10;
 
@@ -66,6 +67,10 @@ func animations():
 		$AnimatedSprite2D.play("idle")
 	pass
 
+func take_damage():
+	print("player took damage")
+	pass
+
 func attack():
 	$AnimatedSprite2D.play("attack")
 	
@@ -76,7 +81,6 @@ func attack():
 func _ready():
 	screen_size = get_viewport_rect().size
 	attack_hitbox = $hitbox
-	
 	pass 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
