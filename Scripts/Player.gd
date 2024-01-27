@@ -1,14 +1,16 @@
 extends CharacterBody2D
 
+var screen_size
 
 const UP_DIRECTION = Vector2.UP
+@export var SPEED = 700
 
-@export var SPEED = 550
-#@export Var DIRECTION = 0
-@export var JUMP_STRENGTH = 1000
+@export var JUMP_STRENGTH = 1500
 @export var GRAVITY = 4500
 
-var screen_size
+var hp = 10;
+
+
 
 '''
 TODO:
@@ -25,8 +27,8 @@ func _ready():
 	pass # Replace with function body.
 
 
-func movement(playerSpeed, delta):
-		# Add the gravity.
+func movement(delta):
+	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
 
@@ -35,7 +37,6 @@ func movement(playerSpeed, delta):
 		velocity.y = -JUMP_STRENGTH
 
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction:
 		velocity.x = direction * SPEED
@@ -43,6 +44,7 @@ func movement(playerSpeed, delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+	pass
 	
 func movement_legacy(velocity, playerSpeed):
 	if Input.is_action_pressed("move_right"):
@@ -61,9 +63,25 @@ func movement_legacy(velocity, playerSpeed):
 	position = position.clamp(Vector2.ZERO, screen_size) # Prevents the player from leaving 
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process (delta):
-	movement(SPEED, delta)
-	
+func animations():
+	if velocity != Vector2.ZERO:
+		$AnimatedSprite2D.stop()
+	else:
+		$AnimatedSprite2D.play("idle")
+	pass
+
+func attack():
 	
 	pass
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process (delta):
+	movement(delta)
+	animations()
+	attack()
+	pass
+
+
+func _on_playerHit():
+	print("Player hit")
+	pass # Replace with function body.

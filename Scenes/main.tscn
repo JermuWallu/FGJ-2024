@@ -1,20 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://bx1f7tvd3btyw"]
+[gd_scene load_steps=5 format=3 uid="uid://bx1f7tvd3btyw"]
 
+[ext_resource type="Script" path="res://Scenes/main.gd" id="1_kamac"]
+[ext_resource type="PackedScene" uid="uid://bngry3j4o6n68" path="res://Scenes/platform.tscn" id="2_ahr8w"]
 [ext_resource type="PackedScene" uid="uid://djmsikwub44xa" path="res://Scenes/player.tscn" id="3_1l4uw"]
-[ext_resource type="Texture2D" uid="uid://bua6obr3vhkvj" path="res://assets/platform.png" id="3_ds34a"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rcodw"]
-size = Vector2(500, 100)
+[ext_resource type="PackedScene" uid="uid://bes7c5c01ccbg" path="res://Scenes/hitbox.tscn" id="4_68uhl"]
 
 [node name="Scene" type="Node2D"]
-
-[node name="Platform" type="StaticBody2D" parent="."]
-position = Vector2(380, 308)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
-shape = SubResource("RectangleShape2D_rcodw")
-
-[node name="Sprite" type="Sprite2D" parent="Platform"]
-texture = ExtResource("3_ds34a")
+script = ExtResource("1_kamac")
 
 [node name="Player" parent="." instance=ExtResource("3_1l4uw")]
+position = Vector2(375, 222)
+collision_layer = 129
+collision_mask = 129
+
+[node name="Platform" parent="." instance=ExtResource("2_ahr8w")]
+position = Vector2(576, 629)
+scale = Vector2(2.36958, 0.914481)
+
+[node name="hitbox" parent="." instance=ExtResource("4_68uhl")]
+position = Vector2(552, 497)
+
+[connection signal="playerHit" from="." to="Player" method="_on_playerHit"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_body_entered"]
