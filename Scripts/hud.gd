@@ -6,16 +6,21 @@ var time_remaining := 0.0
 
 
 func _ready():
-	time_remaining = 60*2
+	time_remaining = 60  #time limit	
 
 func _process(delta: float) -> void:
 	time_remaining -= delta
 	set_timer(snappedf(time_remaining, 0.01)) 
+	
+	if (time_remaining <= 0):
+		pass #TODO: end game logic
+		
 	update_scores()
 	
 	
 func set_timer(time):
 	$Time.text = str(time)
+
 
 func update_scores():
 	score1.text = str(Globals.player1_score)
