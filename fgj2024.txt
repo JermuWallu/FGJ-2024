@@ -6,3 +6,21 @@ Sequence:
 
 BUG:
 - hitbox will hit owner if if its inside its collision
+
+TODO:
+
+- Attacking:
+	- Fix animations
+	- Finalize hitboxes
+	- create i-frames when being hit
+		synch this shit
+
+
+- Enemy:
+	- Make player2
+	- make random ai
+
+- Hud:
+	- Make it into containers
+
+- Blocking?

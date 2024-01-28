@@ -16,12 +16,14 @@ const UP_DIRECTION = Vector2.UP
 @export var GRAVITY = 4500
 
 var attack_hitbox
-var attack_timer
 
-var anim_state
-var anim_timer
+@onready var player_is_attacking = false
+@onready var attack_timer = $AnimationTree/attack_timer
 
-var hp = 10;
+@onready var player_is_hit = false
+@onready var hit_timer = $AnimationTree/hit_timer
+
+@onready var animation_tree : AnimationTree = $AnimationTree
 
 
 '''
@@ -47,51 +49,51 @@ func movement(delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
-	# Animation handling
-	if !anim_timer.is_stopped():
-		if velocity.length() > 0:
-			anim_state = STATE.WALKING
-		else:
-			anim_state = STATE.IDLE
 		
 	move_and_slide()
 	pass
 
 func take_damage():
-	print("player took damage")
-	anim_timer.stop()
-	anim_state = STATE.HIT
-	$AnimatedSprite2D.play("hit")
+	if !player_is_hit:
+		print("player took damage")
+		player_is_hit = true
+		hit_timer.start(1)
+		Globals.player2_score +=1
+	else:
+		print("hit time is on!")
 	pass
 
 func attack():
-	anim_state = STATE.ATTACKING
+	print("player is attacking!")
+	player_is_attacking = true
+	$AnimationTree/attack_timer.start()
+	Globals.player1_score +=1
 	pass
 
-func animations():
-	if anim_state == STATE.HIT:
-		print("anim_state")
-	if anim_timer.is_stopped():
-		if anim_state == STATE.IDLE:
-			$AnimatedSprite2D.play("idle")
-		elif anim_state == STATE.WALKING:
-			$AnimatedSprite2D.play("walk")
-		elif anim_state == STATE.HIT: # EI TOIMI
-			$AnimatedSprite2D.play("hit")
-			anim_timer.set_wait_time(0.5)
-		elif anim_state == STATE.ATTACKING:
-			$AnimatedSprite2D.play("attack")
-			anim_timer.set_wait_time(0.5)
-
-		pass
-
+func update_animation_parameters():
+	if player_is_attacking:
+		animation_tree["parameters/conditions/is_attacking"] = true
+	else:
+		animation_tree["parameters/conditions/is_attacking"] = false
+		
+	if player_is_hit:
+		animation_tree["parameters/conditions/is_hit"] = true
+	else:
+		animation_tree["parameters/conditions/is_hit"] = false
+	pass
+	
+	if (velocity.length() == 0):
+		animation_tree["parameters/conditions/is_idle"] = true
+		animation_tree["parameters/conditions/is_walking"] = false
+	else:
+		animation_tree["parameters/conditions/is_idle"] = false
+		animation_tree["parameters/conditions/is_walking"] = true
+		
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	attack_hitbox = $hitbox #TODO: fix
-	anim_timer = $AnimatedSprite2D/Timer
-	anim_state = STATE.IDLE
+	animation_tree.active = true
 	pass 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -99,9 +101,22 @@ func _physics_process (delta):
 	movement(delta)
 	
 	if Input.is_action_pressed("attack"):
-		attack()
+		if attack_timer.is_stopped():
+			attack()
+		else:
+			print("theres a delay in attacking, time left: ",attack_timer.time_left)
 		
-
-	animations()
-
+	update_animation_parameters() # this should also work in _physics_process
 	pass 
+
+
+func _on_hit_timer_timeout():
+	print("hit timer has ended!")
+	player_is_hit = false
+	pass # Replace with function body.
+
+
+func _on_attack_timer_timeout():
+	print("attack timer has ended!")
+	player_is_attacking = false
+	pass # Replace with function body.
