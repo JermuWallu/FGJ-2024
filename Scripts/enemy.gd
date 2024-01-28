@@ -3,6 +3,7 @@ extends RigidBody2D
 
 func take_damage():
 	print("enemy took damage")
+	Globals.player1_score += 1
 	pass
 
 # Called when the node enters the scene tree for the first time.

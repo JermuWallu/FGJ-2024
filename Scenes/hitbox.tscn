@@ -14,6 +14,8 @@ script = ExtResource("1_io3b0")
 shape = SubResource("RectangleShape2D_dn376")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(100, 100)
 texture = SubResource("CanvasTexture_6s8qn")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -19,4 +19,4 @@ position = Vector2(-5.5, 34.5)
 shape = SubResource("RectangleShape2D_2ejen")
 
 [node name="hitbox" parent="." instance=ExtResource("3_bs7es")]
-position = Vector2(-140, 78)
+position = Vector2(-200, 73)

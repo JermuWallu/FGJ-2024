@@ -15,7 +15,10 @@ const UP_DIRECTION = Vector2.UP
 @export var JUMP_STRENGTH = 1500
 @export var GRAVITY = 4500
 
-var attack_hitbox
+#@onready var hitboxNode = preload("res://Scripts/hitbox.gd") 
+#@onready var hitboxScene = preload("res://Scenes/hitbox.tscn") 
+var hitbox 
+@onready var hitbox_timer = $hitbox/hitbox_timer
 
 @onready var player_is_attacking = false
 @onready var attack_timer = $AnimationTree/attack_timer
@@ -24,15 +27,6 @@ var attack_hitbox
 @onready var hit_timer = $AnimationTree/hit_timer
 
 @onready var animation_tree : AnimationTree = $AnimationTree
-
-
-'''
-TODO:
-	Attack function
-		- animation, spawn collision, add damage 
-
-'''
-
 
 func movement(delta):
 	# Add the gravity.
@@ -53,6 +47,7 @@ func movement(delta):
 	move_and_slide()
 	pass
 
+
 func take_damage():
 	if !player_is_hit:
 		print("player took damage")
@@ -63,12 +58,16 @@ func take_damage():
 		print("hit time is on!")
 	pass
 
+
 func attack():
 	print("player is attacking!")
 	player_is_attacking = true
 	$AnimationTree/attack_timer.start()
-	Globals.player1_score +=1
+	
+	hitbox_timer.start(.3)
+	hitbox.monitoring = true
 	pass
+
 
 func update_animation_parameters():
 	if player_is_attacking:
@@ -90,11 +89,16 @@ func update_animation_parameters():
 		animation_tree["parameters/conditions/is_walking"] = true
 		
 	
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
 	animation_tree.active = true
+	
+	hitbox = $hitbox
+	hitbox.monitoring = false
 	pass 
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process (delta):
@@ -104,7 +108,8 @@ func _physics_process (delta):
 		if attack_timer.is_stopped():
 			attack()
 		else:
-			print("theres a delay in attacking, time left: ",attack_timer.time_left)
+			#print("theres a delay in attacking, time left: ",attack_timer.time_left)
+			pass
 		
 	update_animation_parameters() # this should also work in _physics_process
 	pass 
@@ -119,4 +124,10 @@ func _on_hit_timer_timeout():
 func _on_attack_timer_timeout():
 	print("attack timer has ended!")
 	player_is_attacking = false
+	pass # Replace with function body.
+
+
+func _on_hitbox_timer_timeout():
+	print("HITOX TIMER ENDS")
+	hitbox.monitoring = false
 	pass # Replace with function body.

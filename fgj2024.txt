@@ -1,11 +1,4 @@
-Sequence:
-- player presses attack button
-- animation
-- player node spawn hitbox (gives size and position as parameters)
-- 
 
-BUG:
-- hitbox will hit owner if if its inside its collision
 
 TODO:
 
@@ -14,7 +7,10 @@ TODO:
 	- Finalize hitboxes
 	- create i-frames when being hit
 		synch this shit
-
+	Sequence:
+	- player presses attack button
+	- animation
+	- player node spawn hitbox (gives 	size and position as parameters)
 
 - Enemy:
 	- Make player2
@@ -24,3 +20,7 @@ TODO:
 	- Make it into containers
 
 - Blocking?
+
+BUG:
+- hitbox will hit owner if if its inside its collision
+- Menu music starts over after selecting an option
