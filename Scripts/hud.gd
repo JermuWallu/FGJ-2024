@@ -1,8 +1,11 @@
-extends CanvasLayer
+extends Control
+
 signal start_game
 var time_remaining := 0.0
-@onready var score1 = $Score1
-@onready var score2 = $Score2
+@onready var score1 = $score1/VBoxContainer/Score1
+@onready var score2 = $score2/VBoxContainer/Score2
+
+
 
 
 func _ready():
@@ -19,7 +22,7 @@ func _process(delta: float) -> void:
 	
 	
 func set_timer(time):
-	$Time.text = str(time)
+	$timer/VBoxContainer/Time.text = str(time)
 
 
 func update_scores():
