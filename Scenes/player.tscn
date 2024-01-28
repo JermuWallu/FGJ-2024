@@ -274,6 +274,7 @@ graph_offset = Vector2(296, -55)
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_06llp")
+JUMP_STRENGTH = 2000
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_510kj")
@@ -310,6 +311,7 @@ next/hit = &"idle"
 next/attack = &"idle"
 
 [node name="hitbox" parent="." instance=ExtResource("7_0c0e3")]
+visible = false
 position = Vector2(423.333, 3.33333)
 scale = Vector2(2.48887, 2.46666)
 

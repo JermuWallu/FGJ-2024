@@ -45,6 +45,7 @@ func movement(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 	move_and_slide()
+	position = position.clamp(Vector2.ZERO, screen_size)
 	pass
 
 

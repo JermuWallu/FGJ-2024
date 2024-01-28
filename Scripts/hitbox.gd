@@ -19,7 +19,7 @@ func _on_body_entered(body):
 			body.take_damage()
 		pass
 		await get_tree().create_timer(0.1).timeout
-	#queue_free()  # Destroy the hitbox when touched
+	self.monitoring = false  # disables hits after finding one hit
 
 
 

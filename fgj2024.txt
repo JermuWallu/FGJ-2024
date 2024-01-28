@@ -1,16 +1,7 @@
-
-
 TODO:
 
 - Attacking:
-	- Fix animations
-	- Finalize hitboxes
-	- create i-frames when being hit
-		synch this shit
-	Sequence:
-	- player presses attack button
-	- animation
-	- player node spawn hitbox (gives 	size and position as parameters)
+	DONE
 
 - Enemy:
 	- Make player2
@@ -19,8 +10,25 @@ TODO:
 - Hud:
 	- Make it into containers
 
+- Sound:
+	- add sounds to player
+	- add combat music
+
+- Score:
+	- add score and time limit
+	- add end screen
+
 - Blocking?
 
 BUG:
 - hitbox will hit owner if if its inside its collision
 - Menu music starts over after selecting an option
+- hitbox code very unoptimised, runs infinetly if enemy doesn't leave its body
+- scores are given for the full duration of hitboxes monitoring if take_damage() is not correctly set-up
+
+Attack Sequence:
+	- player presses attack button
+	- animation
+	- enable hitbox monitoring & start timer
+	- hitbox detects collision, calls take_damage() on hit body
+	- corresboding body enables hit timer and adds score

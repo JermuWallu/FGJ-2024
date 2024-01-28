@@ -1,14 +1,16 @@
 extends CanvasLayer
 signal start_game
-var time_elapsed := 0.0
+var time_remaining := 0.0
 @onready var score1 = $Score1
 @onready var score2 = $Score2
 
 
+func _ready():
+	time_remaining = 60*2
 
 func _process(delta: float) -> void:
-	time_elapsed += delta
-	set_timer(snappedf(time_elapsed, 0.01)) 
+	time_remaining -= delta
+	set_timer(snappedf(time_remaining, 0.01)) 
 	update_scores()
 	
 	

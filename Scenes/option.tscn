@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqpfkdjvr8ji3"]
+[gd_scene load_steps=6 format=3 uid="uid://dqpfkdjvr8ji3"]
 
 [ext_resource type="Script" path="res://Scripts/option.gd" id="1_o6f02"]
-[ext_resource type="AudioStream" uid="uid://yfd6loj64ueu" path="res://sounds/main menu bg music.mp3" id="2_md1ph"]
+[ext_resource type="AudioStream" uid="uid://dmmkmdjob7y5t" path="res://sounds/main menu bg music.mp3" id="2_md1ph"]
 [ext_resource type="Texture2D" uid="uid://c5cwka4lgwhdy" path="res://assets/menu_bg.png" id="3_vv6qa"]
-[ext_resource type="AudioStream" uid="uid://b0gb7qaa7efii" path="res://sounds/blob.wav" id="4_kx2be"]
+[ext_resource type="AudioStream" uid="uid://u5020ur5kjk1" path="res://sounds/blob.wav" id="4_kx2be"]
+[ext_resource type="Texture2D" uid="uid://bq2m15y65km8f" path="res://assets/controls.png" id="5_fxjew"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -79,6 +80,12 @@ volume_db = 15.0
 stream = ExtResource("2_md1ph")
 volume_db = -5.0
 autoplay = true
+
+[node name="controls_sprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(575, 323.5)
+scale = Vector2(0.601042, 0.600926)
+texture = ExtResource("5_fxjew")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/play p2" to="." method="_on_play_p_2_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/play cpu" to="." method="_on_play_cpu_pressed"]
