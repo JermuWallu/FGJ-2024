@@ -4,11 +4,8 @@ TODO:
 	DONE
 
 - Enemy:
-	- Make player2
 	- make random ai
 
-- Hud:
-	- Make it into containers
 
 - Sound:
 	- add sounds to player

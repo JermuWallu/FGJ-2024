@@ -28,6 +28,8 @@ var hitbox
 
 @onready var animation_tree : AnimationTree = $AnimationTree
 
+@onready var audio = $audios
+
 func movement(delta):
 	# Add the gravity.
 	if not is_on_floor():
@@ -35,6 +37,7 @@ func movement(delta):
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		audio.play_sound("jump")	
 		velocity.y = -JUMP_STRENGTH
 
 	# Get the input direction and handle the movement/deceleration.
@@ -53,8 +56,9 @@ func take_damage():
 	if !player_is_hit:
 		print("player took damage")
 		player_is_hit = true
-		hit_timer.start(1)
+		hit_timer.start(.6)
 		Globals.player2_score +=1
+		audio.play_sound("hehe1")	
 	else:
 		print("hit time is on!")
 	pass
@@ -64,8 +68,8 @@ func attack():
 	print("player is attacking!")
 	player_is_attacking = true
 	$AnimationTree/attack_timer.start()
-	
-	hitbox_timer.start(.3)
+	audio.play_sound("kutikuti1")	
+	hitbox_timer.start(.2)
 	hitbox.monitoring = true
 	pass
 

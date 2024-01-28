@@ -6,18 +6,18 @@
 script = ExtResource("1_ywk7o")
 
 [node name="Score1" type="Label" parent="."]
-offset_left = 121.0
-offset_top = 88.0
-offset_right = 158.0
-offset_bottom = 176.0
+offset_left = 128.0
+offset_top = 100.0
+offset_right = 165.0
+offset_bottom = 188.0
 theme_override_font_sizes/font_size = 64
 text = "0"
 
 [node name="Score2" type="Label" parent="."]
-offset_left = 952.0
-offset_top = 138.0
-offset_right = 989.0
-offset_bottom = 226.0
+offset_left = 959.0
+offset_top = 94.0
+offset_right = 996.0
+offset_bottom = 182.0
 theme_override_font_sizes/font_size = 64
 text = "0"
 
@@ -38,10 +38,10 @@ theme_override_font_sizes/font_size = 45
 text = "Player1"
 
 [node name="Score2Label" type="Label" parent="."]
-offset_left = 874.0
-offset_top = 34.0
-offset_right = 1036.0
-offset_bottom = 101.0
+offset_left = 890.0
+offset_top = 11.0
+offset_right = 1052.0
+offset_bottom = 78.0
 theme_override_font_sizes/font_size = 45
 text = "Player2
 "

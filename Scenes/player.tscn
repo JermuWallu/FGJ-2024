@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://djmsikwub44xa"]
+[gd_scene load_steps=39 format=3 uid="uid://djmsikwub44xa"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_06llp"]
 [ext_resource type="Texture2D" uid="uid://csa020oaa7v1f" path="res://assets/tickler_1_attack1.png" id="2_iw7o5"]
@@ -7,6 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://cby7i5hfht6se" path="res://assets/tickler_1_oof.png" id="4_kovf2"]
 [ext_resource type="Texture2D" uid="uid://cpdsomta1bew6" path="res://assets/tickler_1_move.png" id="6_ss77y"]
 [ext_resource type="PackedScene" uid="uid://bes7c5c01ccbg" path="res://Scenes/hitbox.tscn" id="7_0c0e3"]
+[ext_resource type="Script" path="res://Scripts/audios.gd" id="8_3xexe"]
+[ext_resource type="AudioStream" uid="uid://b2lckmtgojc6b" path="res://sounds/jump.wav" id="8_u45l1"]
+[ext_resource type="AudioStream" uid="uid://dsdtee8jskjho" path="res://sounds/jump2.wav" id="9_dqcdt"]
+[ext_resource type="AudioStream" uid="uid://dj56pi4y8tvgc" path="res://sounds/kutikuti1.wav" id="10_m81tk"]
+[ext_resource type="AudioStream" uid="uid://rxjt2am5b2bf" path="res://sounds/kutikuti2.wav" id="11_y85mf"]
+[ext_resource type="AudioStream" uid="uid://lnhm6psnmaja" path="res://sounds/hehe.wav" id="12_bpoow"]
+[ext_resource type="AudioStream" uid="uid://c62g8dlyjyxa0" path="res://sounds/hehe2.wav" id="13_uduae"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_510kj"]
 animations = [{
@@ -92,7 +99,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"attack"]
+"values": [&"idle"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -106,6 +113,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_cjj2s"]
 resource_name = "hit"
@@ -116,9 +135,9 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
+"update": 0,
 "values": [0, 1]
 }
 tracks/1/type = "value"
@@ -133,6 +152,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"hit"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_apagx"]
 resource_name = "attack"
@@ -143,10 +174,10 @@ tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [&"attack"]
+"values": [&"attack", &"idle"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -155,7 +186,7 @@ tracks/1/path = NodePath("AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.5),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 0]
@@ -163,6 +194,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_eprkp"]
 resource_name = "walk"
+length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -171,7 +203,7 @@ tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(-0.1, 0),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [&"walk", &"walk"]
@@ -183,10 +215,10 @@ tracks/1/path = NodePath("AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(-0.1, 0, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 0, 0]
+"values": [0, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6yrhk"]
@@ -274,11 +306,10 @@ graph_offset = Vector2(296, -55)
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_06llp")
-JUMP_STRENGTH = 2000
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_510kj")
-animation = &"attack"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(39.5, 5.5)
@@ -286,6 +317,7 @@ scale = Vector2(1.04285, 1)
 shape = SubResource("RectangleShape2D_g3kb2")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
 libraries = {
 "": SubResource("AnimationLibrary_6yrhk")
 }
@@ -317,6 +349,27 @@ scale = Vector2(2.48887, 2.46666)
 
 [node name="hitbox_timer" type="Timer" parent="hitbox"]
 one_shot = true
+
+[node name="audios" type="Node2D" parent="."]
+script = ExtResource("8_3xexe")
+
+[node name="jump" type="AudioStreamPlayer" parent="audios"]
+stream = ExtResource("8_u45l1")
+
+[node name="jump2" type="AudioStreamPlayer" parent="audios"]
+stream = ExtResource("9_dqcdt")
+
+[node name="kutikuti1" type="AudioStreamPlayer" parent="audios"]
+stream = ExtResource("10_m81tk")
+
+[node name="kutikuti2" type="AudioStreamPlayer" parent="audios"]
+stream = ExtResource("11_y85mf")
+
+[node name="hehe1" type="AudioStreamPlayer" parent="audios"]
+stream = ExtResource("12_bpoow")
+
+[node name="hehe2" type="AudioStreamPlayer" parent="audios"]
+stream = ExtResource("13_uduae")
 
 [connection signal="timeout" from="AnimationTree/hit_timer" to="." method="_on_hit_timer_timeout"]
 [connection signal="timeout" from="AnimationTree/attack_timer" to="." method="_on_attack_timer_timeout"]

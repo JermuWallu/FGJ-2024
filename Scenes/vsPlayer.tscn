@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://rah2ebyqcwdc"]
+[gd_scene load_steps=7 format=3 uid="uid://rah2ebyqcwdc"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_ge8vk"]
 [ext_resource type="PackedScene" uid="uid://bngry3j4o6n68" path="res://Scenes/platform.tscn" id="2_dmibj"]
 [ext_resource type="PackedScene" uid="uid://djmsikwub44xa" path="res://Scenes/player.tscn" id="4_pq8ia"]
 [ext_resource type="PackedScene" uid="uid://b5liqea3v44i" path="res://Scenes/player2.tscn" id="5_c1p8d"]
 [ext_resource type="PackedScene" uid="uid://byl8vldpfpyyb" path="res://Scenes/hud.tscn" id="5_opbqg"]
+[ext_resource type="AudioStream" uid="uid://d0ohpk373n5pt" path="res://sounds/in-game bg music.mp3" id="6_65uk8"]
 
 [node name="Scene" type="Node2D"]
 script = ExtResource("1_ge8vk")
@@ -20,3 +21,8 @@ position = Vector2(148, 229)
 
 [node name="Player2" parent="." instance=ExtResource("5_c1p8d")]
 position = Vector2(945, 224)
+
+[node name="background music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_65uk8")
+volume_db = -15.0
+autoplay = true
